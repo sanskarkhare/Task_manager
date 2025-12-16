@@ -5,6 +5,7 @@ import { useTasks } from '../../hooks/useTasks';
 import TaskCard from '../../components/TaskCard';
 import TaskForm from '../../components/TaskForm';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import NotificationList from '../../components/NotificationList';
 
 export default function DashboardPage() {
@@ -51,6 +52,9 @@ export default function DashboardPage() {
                     </h1>
                     <div className="flex items-center gap-4">
                         <NotificationList />
+                        <Link href="/profile" className="text-gray-900 hover:text-blue-600 font-medium">
+                            Profile
+                        </Link>
                         <button
                             onClick={() => {
                                 localStorage.removeItem('token');

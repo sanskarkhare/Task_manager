@@ -21,10 +21,16 @@ export class UserRepository {
         return prisma.user.findUnique({ where: { id } });
     }
 
+    async update(id: string, data: { name?: string }): Promise<User> {
+        return prisma.user.update({
+            where: { id },
+            data,
+        });
+    }
+
     async findAll(): Promise<User[]> {
         return prisma.user.findMany({
-            select: { id: true, name: true, email: true, password: false, createdAt: true, updatedAt: true }
-            // @ts-ignore
-        }) as User[];
+            select: { id: true, name: true, email: true, createdAt: true, updatedAt: true }
+        }) as unknown as User[];
     }
 }

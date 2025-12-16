@@ -36,11 +36,18 @@ class UserRepository {
             return db_1.default.user.findUnique({ where: { id } });
         });
     }
+    update(id, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return db_1.default.user.update({
+                where: { id },
+                data,
+            });
+        });
+    }
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
             return db_1.default.user.findMany({
-                select: { id: true, name: true, email: true, password: false, createdAt: true, updatedAt: true }
-                // @ts-ignore
+                select: { id: true, name: true, email: true, createdAt: true, updatedAt: true }
             });
         });
     }

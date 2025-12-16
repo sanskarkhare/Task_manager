@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { AuthService } from '../services/auth.service';
-import { CreateUserSchema, LoginSchema } from '../dtos/auth.dto';
+import { CreateUserSchema, LoginSchema, UpdateProfileSchema } from '../dtos/auth.dto';
 
 export class AuthController {
     private authService: AuthService;
@@ -35,6 +35,27 @@ export class AuthController {
             res.json(users);
         } catch (error: any) {
             res.status(500).json({ error: error.message });
+        }
+    };
+
+    getProfile = async (req: Request, res: Response) => {
+        try {
+            const userId = (req as any).user.id;
+            const user = await this.authService.getProfile(userId);
+            res.json(user);
+        } catch (error: any) {
+            res.status(404).json({ error: error.message });
+        }
+    };
+
+    updateProfile = async (req: Request, res: Response) => {
+        try {
+            const userId = (req as any).user.id;
+            const data = UpdateProfileSchema.parse(req.body);
+            const user = await this.authService.updateProfile(userId, data);
+            res.json(user);
+        } catch (error: any) {
+            res.status(400).json({ error: error.message });
         }
     };
 }

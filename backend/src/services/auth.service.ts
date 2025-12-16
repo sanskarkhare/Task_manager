@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { UserRepository } from '../repositories/user.repository';
-import { CreateUserDto, LoginDto } from '../dtos/auth.dto';
+import { CreateUserDto, LoginDto, UpdateProfileDto } from '../dtos/auth.dto';
 import { signToken } from '../config/jwt';
 import { User } from '@prisma/client';
 
@@ -41,5 +41,15 @@ export class AuthService {
 
     async getAllUsers(): Promise<User[]> {
         return this.userRepo.findAll();
+    }
+
+    async getProfile(userId: string): Promise<User> {
+        const user = await this.userRepo.findById(userId);
+        if (!user) throw new Error('User not found');
+        return user;
+    }
+
+    async updateProfile(userId: string, data: UpdateProfileDto): Promise<User> {
+        return this.userRepo.update(userId, data);
     }
 }

@@ -51,5 +51,18 @@ class AuthService {
             return this.userRepo.findAll();
         });
     }
+    getProfile(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield this.userRepo.findById(userId);
+            if (!user)
+                throw new Error('User not found');
+            return user;
+        });
+    }
+    updateProfile(userId, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.userRepo.update(userId, data);
+        });
+    }
 }
 exports.AuthService = AuthService;

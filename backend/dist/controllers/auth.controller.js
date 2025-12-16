@@ -43,6 +43,27 @@ class AuthController {
                 res.status(500).json({ error: error.message });
             }
         });
+        this.getProfile = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const userId = req.user.id;
+                const user = yield this.authService.getProfile(userId);
+                res.json(user);
+            }
+            catch (error) {
+                res.status(404).json({ error: error.message });
+            }
+        });
+        this.updateProfile = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const userId = req.user.id;
+                const data = auth_dto_1.UpdateProfileSchema.parse(req.body);
+                const user = yield this.authService.updateProfile(userId, data);
+                res.json(user);
+            }
+            catch (error) {
+                res.status(400).json({ error: error.message });
+            }
+        });
         this.authService = new auth_service_1.AuthService();
     }
 }
