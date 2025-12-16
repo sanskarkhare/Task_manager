@@ -45,7 +45,7 @@ export default function DashboardPage() {
         <div className="min-h-screen bg-gray-50 p-8">
             <div className="max-w-6xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-800">
+                    <h1 className="text-3xl font-bold text-gray-950">
                         My Dashboard {userName && <span className="text-blue-600">({userName})</span>}
                     </h1>
                     <button
@@ -54,7 +54,7 @@ export default function DashboardPage() {
                             localStorage.removeItem('user');
                             router.push('/login');
                         }}
-                        className="text-sm text-gray-500 hover:text-red-500"
+                        className="text-sm text-gray-700 hover:text-red-500"
                     >
                         Logout
                     </button>
@@ -62,7 +62,7 @@ export default function DashboardPage() {
 
                 <div className="flex flex-wrap gap-4 mb-6 items-end">
                     <div className="flex-1">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                        <label className="block text-sm font-medium text-gray-900 mb-1">Status</label>
                         <select
                             className="border rounded p-2 w-full"
                             value={filters.status}
@@ -76,7 +76,7 @@ export default function DashboardPage() {
                         </select>
                     </div>
                     <div className="flex-1">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                        <label className="block text-sm font-medium text-gray-900 mb-1">Priority</label>
                         <select
                             className="border rounded p-2 w-full"
                             value={filters.priority}
@@ -105,7 +105,7 @@ export default function DashboardPage() {
                             <TaskCard key={task.id} task={task} onEdit={handleEdit} />
                         ))}
                         {tasks?.length === 0 && (
-                            <p className="text-gray-500 col-span-full text-center py-10">No tasks found. Create one to get started!</p>
+                            <p className="text-gray-600 col-span-full text-center py-10">No tasks found. Create one to get started!</p>
                         )}
                     </div>
                 )}

@@ -21,16 +21,16 @@ export default function TaskCard({ task, onEdit }: TaskCardProps) {
             <div className="flex justify-between items-start">
                 <h3 className="font-semibold text-lg">{task.title}</h3>
                 <span className={`text-xs px-2 py-1 rounded ${task.priority === 'URGENT' ? 'bg-red-100 text-red-800' :
-                        task.priority === 'HIGH' ? 'bg-orange-100 text-orange-800' :
-                            task.priority === 'MEDIUM' ? 'bg-yellow-100 text-yellow-800' :
-                                'bg-green-100 text-green-800'
+                    task.priority === 'HIGH' ? 'bg-orange-100 text-orange-800' :
+                        task.priority === 'MEDIUM' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-green-100 text-green-800'
                     }`}>
                     {task.priority}
                 </span>
             </div>
-            <p className="text-gray-600 mt-2 text-sm">{task.description}</p>
+            <p className="text-gray-800 mt-2 text-sm">{task.description}</p>
             <div className="mt-4 flex justify-between items-center text-sm">
-                <span className="text-gray-500">Due: {new Date(task.dueDate).toLocaleDateString()}</span>
+                <span className="text-gray-700">Due: {new Date(task.dueDate).toLocaleDateString()}</span>
                 <select
                     value={task.status}
                     onChange={handleStatusChange}
