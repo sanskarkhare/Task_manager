@@ -19,7 +19,7 @@ export default function TaskCard({ task, onEdit }: TaskCardProps) {
     return (
         <div className="p-4 bg-white rounded shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
             <div className="flex justify-between items-start">
-                <h3 className="font-semibold text-lg">{task.title}</h3>
+                <h3 className="font-semibold text-lg text-gray-700">{task.title}</h3>
                 <span className={`text-xs px-2 py-1 rounded ${task.priority === 'URGENT' ? 'bg-red-100 text-red-800' :
                     task.priority === 'HIGH' ? 'bg-orange-100 text-orange-800' :
                         task.priority === 'MEDIUM' ? 'bg-yellow-100 text-yellow-800' :
@@ -29,6 +29,11 @@ export default function TaskCard({ task, onEdit }: TaskCardProps) {
                 </span>
             </div>
             <p className="text-gray-800 mt-2 text-sm">{task.description}</p>
+            {task.assignee && (
+                <div className="mt-2 text-sm text-gray-700">
+                    <span className="font-medium text-gray-900">Assigned to:</span> {task.assignee.name || task.assignee.email}
+                </div>
+            )}
             <div className="mt-4 flex justify-between items-center text-sm">
                 <span className="text-gray-700">Due: {new Date(task.dueDate).toLocaleDateString()}</span>
                 <select

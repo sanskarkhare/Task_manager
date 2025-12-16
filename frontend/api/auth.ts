@@ -26,3 +26,8 @@ export const register = async (data: RegisterData) => {
     const response = await client.post('/auth/register', data);
     return response.data;
 };
+
+export const getUsers = async () => {
+    const response = await client.get('/auth/users');
+    return response.data;
+};

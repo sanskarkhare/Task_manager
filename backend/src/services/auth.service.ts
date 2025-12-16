@@ -38,4 +38,8 @@ export class AuthService {
         const token = signToken({ id: user.id });
         return { user, token };
     }
+
+    async getAllUsers(): Promise<User[]> {
+        return this.userRepo.findAll();
+    }
 }

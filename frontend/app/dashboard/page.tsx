@@ -5,6 +5,7 @@ import { useTasks } from '../../hooks/useTasks';
 import TaskCard from '../../components/TaskCard';
 import TaskForm from '../../components/TaskForm';
 import { useRouter } from 'next/navigation';
+import NotificationList from '../../components/NotificationList';
 
 export default function DashboardPage() {
     const router = useRouter();
@@ -48,16 +49,19 @@ export default function DashboardPage() {
                     <h1 className="text-3xl font-bold text-gray-950">
                         My Dashboard {userName && <span className="text-blue-600">({userName})</span>}
                     </h1>
-                    <button
-                        onClick={() => {
-                            localStorage.removeItem('token');
-                            localStorage.removeItem('user');
-                            router.push('/login');
-                        }}
-                        className="text-sm text-gray-900 hover:text-red-500"
-                    >
-                        Logout
-                    </button>
+                    <div className="flex items-center gap-4">
+                        <NotificationList />
+                        <button
+                            onClick={() => {
+                                localStorage.removeItem('token');
+                                localStorage.removeItem('user');
+                                router.push('/login');
+                            }}
+                            className="text-sm text-gray-900 hover:text-red-500"
+                        >
+                            Logout
+                        </button>
+                    </div>
                 </div>
 
                 <div className="flex flex-wrap gap-4 mb-6 items-end">

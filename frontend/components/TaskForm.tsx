@@ -3,6 +3,8 @@
 import { useForm } from 'react-hook-form';
 import { useCreateTask, useUpdateTask } from '../hooks/useTasks';
 import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getUsers } from '../api/auth';
 
 interface TaskFormProps {
     task?: any;
@@ -12,12 +14,18 @@ interface TaskFormProps {
 export default function TaskForm({ task, onClose }: TaskFormProps) {
     const createTask = useCreateTask();
     const updateTask = useUpdateTask();
+    const { data: users } = useQuery({
+        queryKey: ['users'],
+        queryFn: getUsers,
+    });
+
     const { register, handleSubmit, reset } = useForm({
         defaultValues: task || {
             title: '',
             description: '',
             dueDate: new Date().toISOString().split('T')[0],
             priority: 'LOW',
+            assignedToId: '',
         },
     });
 
@@ -29,6 +37,13 @@ export default function TaskForm({ task, onClose }: TaskFormProps) {
 
     const onSubmit = (data: any) => {
         const payload = { ...data, dueDate: new Date(data.dueDate).toISOString() };
+        // If assignedToId is empty string "Choose User", remove it or set to null?
+        // Usually backend expects null if not assigned, or string.
+        // If empty string is passed and backend expects ID, it might fail.
+        if (payload.assignedToId === '') {
+            delete payload.assignedToId;
+        }
+
         if (task) {
             updateTask.mutate({ id: task.id, data: payload }, { onSuccess: onClose });
         } else {
@@ -49,6 +64,14 @@ export default function TaskForm({ task, onClose }: TaskFormProps) {
                         <option value="MEDIUM">Medium</option>
                         <option value="HIGH">High</option>
                         <option value="URGENT">Urgent</option>
+                    </select>
+                    <select {...register('assignedToId')} className="w-full border p-2 rounded text-gray-900">
+                        <option value="">Assign to User (Optional)</option>
+                        {users?.map((user: any) => (
+                            <option key={user.id} value={user.id}>
+                                {user.name} ({user.email})
+                            </option>
+                        ))}
                     </select>
                     <div className="flex justify-end space-x-2">
                         <button type="button" onClick={onClose} className="px-4 py-2 border rounded text-gray-900 hover:bg-gray-50">Cancel</button>

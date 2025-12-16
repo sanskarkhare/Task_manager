@@ -1,9 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getTasks, createTask, updateTask, deleteTask } from '../api/tasks';
 import { useEffect } from 'react';
-import io from 'socket.io-client';
-
-const socket = io(process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:3001');
+import socket from '../utils/socket';
 
 export const useTasks = (filters?: any) => {
     const queryClient = useQueryClient();

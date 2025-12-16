@@ -2,12 +2,15 @@ import { TaskRepository } from '../repositories/task.repository';
 import { CreateTaskDto, UpdateTaskDto } from '../dtos/task.dto';
 import { getIO } from '../socket/socketHandler';
 import { Status, Priority } from '@prisma/client';
+import { NotificationService } from './notification.service';
 
 export class TaskService {
     private taskRepo: TaskRepository;
+    private notificationService: NotificationService;
 
     constructor() {
         this.taskRepo = new TaskRepository();
+        this.notificationService = new NotificationService();
     }
 
     async create(data: CreateTaskDto, creatorId: string) {
@@ -19,7 +22,12 @@ export class TaskService {
 
             // Notify assignee specifically
             if (task.assignedToId) {
-                getIO().to(task.assignedToId).emit('taskAssigned', task);
+                // Persistent notification
+                await this.notificationService.createNotification(
+                    task.assignedToId,
+                    `You have been assigned to task: ${task.title}`,
+                    task.id
+                );
             }
         } catch (e) { console.error('Socket emit failed', e); }
 
@@ -40,9 +48,13 @@ export class TaskService {
         try {
             getIO().emit('taskUpdated', task);
 
-            // Notify assignee if assignedToId changed (would need old task to compare, simplified here)
-            if (task.assignedToId) {
-                getIO().to(task.assignedToId).emit('taskAssigned', task);
+            // Notify assignee if assignedToId changed
+            if (task.assignedToId) { // Simplified check, ideally compare with old value
+                await this.notificationService.createNotification(
+                    task.assignedToId,
+                    `Task updated/assigned: ${task.title}`,
+                    task.id
+                );
             }
         } catch (e) { console.error('Socket emit failed', e); }
 

@@ -20,4 +20,11 @@ export class UserRepository {
     async findById(id: string): Promise<User | null> {
         return prisma.user.findUnique({ where: { id } });
     }
+
+    async findAll(): Promise<User[]> {
+        return prisma.user.findMany({
+            select: { id: true, name: true, email: true, password: false, createdAt: true, updatedAt: true }
+            // @ts-ignore
+        }) as User[];
+    }
 }
