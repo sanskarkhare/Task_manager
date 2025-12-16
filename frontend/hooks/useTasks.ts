@@ -3,7 +3,7 @@ import { getTasks, createTask, updateTask, deleteTask } from '../api/tasks';
 import { useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:3001');
+const socket = io(process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:3001');
 
 export const useTasks = (filters?: any) => {
     const queryClient = useQueryClient();

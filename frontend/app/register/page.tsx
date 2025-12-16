@@ -31,29 +31,29 @@ export default function RegisterPage() {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="p-8 bg-white rounded shadow-md w-96">
-                <h2 className="mb-6 text-2xl font-bold text-center">Register</h2>
+                <h2 className="mb-6 text-2xl font-bold text-center text-gray-900">Register</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium">Name</label>
+                        <label className="block text-sm font-medium text-gray-900">Name</label>
                         <input
                             {...register('name')}
-                            className="w-full p-2 border rounded mt-1"
+                            className="w-full p-2 border rounded mt-1 text-gray-900"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium">Email</label>
+                        <label className="block text-sm font-medium text-gray-900">Email</label>
                         <input
                             {...register('email')}
-                            className="w-full p-2 border rounded mt-1"
+                            className="w-full p-2 border rounded mt-1 text-gray-900"
                             type="email"
                         />
                         {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
                     </div>
                     <div>
-                        <label className="block text-sm font-medium">Password</label>
+                        <label className="block text-sm font-medium text-gray-900">Password</label>
                         <input
                             {...register('password')}
-                            className="w-full p-2 border rounded mt-1"
+                            className="w-full p-2 border rounded mt-1 text-gray-900"
                             type="password"
                         />
                         {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
@@ -66,8 +66,8 @@ export default function RegisterPage() {
                         {mutation.isPending ? 'Registering...' : 'Register'}
                     </button>
                 </form>
-                <p className="mt-4 text-center text-sm">
-                    Already have an account? <a href="/login" className="text-blue-500">Login</a>
+                <p className="mt-4 text-center text-sm text-gray-900">
+                    Already have an account? <a href="/login" className="text-blue-600 hover:text-blue-800">Login</a>
                 </p>
             </div>
         </div>

@@ -34,7 +34,7 @@ export default function TaskCard({ task, onEdit }: TaskCardProps) {
                 <select
                     value={task.status}
                     onChange={handleStatusChange}
-                    className="border rounded p-1 text-xs"
+                    className="border rounded p-1 text-xs text-gray-900"
                 >
                     <option value="TO_DO">To Do</option>
                     <option value="IN_PROGRESS">In Progress</option>

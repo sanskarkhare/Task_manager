@@ -39,19 +39,19 @@ export default function TaskForm({ task, onClose }: TaskFormProps) {
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded shadow-lg w-96">
-                <h2 className="text-xl font-bold mb-4">{task ? 'Edit Task' : 'New Task'}</h2>
+                <h2 className="text-xl font-bold mb-4 text-gray-900">{task ? 'Edit Task' : 'New Task'}</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    <input {...register('title')} placeholder="Title" className="w-full border p-2 rounded" required />
-                    <textarea {...register('description')} placeholder="Description" className="w-full border p-2 rounded" />
-                    <input type="date" {...register('dueDate')} className="w-full border p-2 rounded" required />
-                    <select {...register('priority')} className="w-full border p-2 rounded">
+                    <input {...register('title')} placeholder="Title" className="w-full border p-2 rounded placeholder-gray-600 text-gray-900" required />
+                    <textarea {...register('description')} placeholder="Description" className="w-full border p-2 rounded placeholder-gray-600 text-gray-900" />
+                    <input type="date" {...register('dueDate')} className="w-full border p-2 rounded text-gray-900" required />
+                    <select {...register('priority')} className="w-full border p-2 rounded text-gray-900">
                         <option value="LOW">Low</option>
                         <option value="MEDIUM">Medium</option>
                         <option value="HIGH">High</option>
                         <option value="URGENT">Urgent</option>
                     </select>
                     <div className="flex justify-end space-x-2">
-                        <button type="button" onClick={onClose} className="px-4 py-2 border rounded">Cancel</button>
+                        <button type="button" onClick={onClose} className="px-4 py-2 border rounded text-gray-900 hover:bg-gray-50">Cancel</button>
                         <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">Save</button>
                     </div>
                 </form>

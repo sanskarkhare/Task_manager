@@ -54,7 +54,7 @@ export default function DashboardPage() {
                             localStorage.removeItem('user');
                             router.push('/login');
                         }}
-                        className="text-sm text-gray-700 hover:text-red-500"
+                        className="text-sm text-gray-900 hover:text-red-500"
                     >
                         Logout
                     </button>
@@ -64,7 +64,7 @@ export default function DashboardPage() {
                     <div className="flex-1">
                         <label className="block text-sm font-medium text-gray-900 mb-1">Status</label>
                         <select
-                            className="border rounded p-2 w-full"
+                            className="border rounded p-2 w-full text-gray-900"
                             value={filters.status}
                             onChange={(e) => setFilters(prev => ({ ...prev, status: e.target.value }))}
                         >
@@ -78,7 +78,7 @@ export default function DashboardPage() {
                     <div className="flex-1">
                         <label className="block text-sm font-medium text-gray-900 mb-1">Priority</label>
                         <select
-                            className="border rounded p-2 w-full"
+                            className="border rounded p-2 w-full text-gray-900"
                             value={filters.priority}
                             onChange={(e) => setFilters(prev => ({ ...prev, priority: e.target.value }))}
                         >
@@ -105,7 +105,7 @@ export default function DashboardPage() {
                             <TaskCard key={task.id} task={task} onEdit={handleEdit} />
                         ))}
                         {tasks?.length === 0 && (
-                            <p className="text-gray-600 col-span-full text-center py-10">No tasks found. Create one to get started!</p>
+                            <p className="text-gray-800 col-span-full text-center py-10">No tasks found. Create one to get started!</p>
                         )}
                     </div>
                 )}
