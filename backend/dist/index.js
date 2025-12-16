@@ -15,7 +15,7 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3001;
 app.use((0, cors_1.default)({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://task-manager-frontend.onrender.com'], // Add your deployed frontend URL here when you have it
     credentials: true,
 }));
 app.use(express_1.default.json());

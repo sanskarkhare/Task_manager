@@ -7,7 +7,7 @@ export class TaskRepository {
         return prisma.task.create({
             data: {
                 ...data,
-                dueDate: new Date(data.dueDate),
+                dueDate: new Date(data.dueDate as string),
                 creatorId,
             },
             include: { assignee: true, creator: true },
@@ -37,7 +37,7 @@ export class TaskRepository {
 
     async update(id: string, data: UpdateTaskDto): Promise<Task> {
         const updateData: any = { ...data };
-        if (data.dueDate) updateData.dueDate = new Date(data.dueDate);
+        if (data.dueDate) updateData.dueDate = new Date(data.dueDate as string);
 
         return prisma.task.update({
             where: { id },
