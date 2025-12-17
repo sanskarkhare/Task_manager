@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://task-manager-frontend.onrender.com'], // Add your deployed frontend URL here when you have it
+    origin: ['http://localhost:3000', 'https://task-manager-frontend.onrender.com', 'https://task-manager-frontend-psi-six.vercel.app'],
     credentials: true,
 }));
 app.use(express.json());

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://task-manager-afkr.onrender.com/api',
+    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api',
     withCredentials: true,
 });
 
