@@ -1,16 +1,15 @@
 FROM node:18-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
-
 RUN npm install
 
 COPY . .
 
-RUN npx prisma generate
+# Build the application
 RUN npm run build
 
-EXPOSE 3001
+EXPOSE 3000
 
 CMD ["npm", "start"]
