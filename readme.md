@@ -50,6 +50,18 @@ A production-ready full-stack Task Management application built with **Next.js**
     - Frontend: http://localhost:3000
     - Backend: http://localhost:3001
 
+## 🐳 Docker Support
+
+Run the entire application stack (Frontend, Backend, and PostgreSQL) with a single command:
+
+```bash
+docker-compose up --build
+```
+This will start:
+- **Frontend** on port `3000`
+- **Backend** on port `3001`
+- **PostgreSQL** on port `5432`
+
 ## 📚 API Documentation
 
 ### Auth
